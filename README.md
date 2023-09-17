@@ -35,9 +35,7 @@ _✨ 一款可以自由增删视频指令和api的插件 ✨_
 
     nb plugin install nonebot-plugin-video-api
 
-</details>
 
-<details>
 <summary>使用包管理器安装</summary>
 在 nonebot2 项目的插件目录下, 打开命令行, 根据你使用的包管理器, 输入相应的安装命令
 
