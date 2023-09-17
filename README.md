@@ -59,8 +59,8 @@ _✨ 一款可以自由增删视频指令和api的插件 ✨_
 - 注: 本插件的配置在bot根目录下的config文件夹下，名为video_api_config.yml，该文件会在插件第一次运行时自动生成。其内容如同介绍中的截图所示。
 写法如下所示：
 ```
-    dy|抖音:
-    - url: https://api.yujn.cn/api/dy_hot.php
+dy|抖音:
+- url: https://api.yujn.cn/api/dy_hot.php
 ```
 
 其中，dy|抖音 代表api的触发指令，用"dy"或者是"抖音"均可触发。url后跟api；is_proxy代表是否使用代理，可不写，默认false
@@ -68,10 +68,10 @@ _✨ 一款可以自由增删视频指令和api的插件 ✨_
 也可在一个关键词下设置多个url，如下所示：
 
 ```
-    小姐姐:
-    - is_proxy: false
-      url: http://api.yujn.cn/api/zzxjj.php?type=video
-    - url: http://api.yujn.cn/api/xjj.php
+小姐姐:
+- is_proxy: false
+  url: http://api.yujn.cn/api/zzxjj.php?type=video
+- url: http://api.yujn.cn/api/xjj.php
 ```
 其中，is_proxy没写，采用默认值false
 
