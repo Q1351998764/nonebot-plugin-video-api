@@ -1,6 +1,6 @@
 from nonebot import get_driver
 from nonebot import on_fullmatch, on_message
-from .config import Config, config_path
+from .config import Config, plugin_config_file
 from nonebot.adapters.onebot.v11 import MessageSegment
 import httpx, yaml, asyncio, tempfile 
 from random import choice
@@ -82,7 +82,7 @@ async def get_video(url, is_proxy=False):
     proxies = None
     if is_proxy:
         try:
-            proxy = plugin_config.proxies_http
+            proxy = plugin_config.global_config.proxies_http
         except:
             await keyword.finish("请先在.env中配置代理")
         proxies = {
@@ -183,7 +183,7 @@ async def add_video_api(video_api:str = ArgPlainText(), video_name:str = ArgPlai
                 async with lock:
                     api_info = cmds_config.get(cmd)
                     api_info.append({"url":video_api})
-                    with open(config_path, 'w', encoding='utf-8') as f:
+                    with open(plugin_config_file, 'w', encoding='utf-8') as f:
                         yaml.dump(cmds_config, f, allow_unicode=True)
                 await add_api.send("添加成功")
                 break
@@ -191,7 +191,7 @@ async def add_video_api(video_api:str = ArgPlainText(), video_name:str = ArgPlai
         async with lock:
             cmds.append(video_name)
             cmds_config[video_name] = [{"url":video_api}]
-            with open(config_path, 'w', encoding='utf-8') as f:
+            with open(plugin_config_file, 'w', encoding='utf-8') as f:
                 yaml.dump(cmds_config, f, allow_unicode=True)
         await add_api.send("添加成功")
 
