@@ -1,9 +1,12 @@
 from pydantic import BaseModel, Extra
-import yaml
+import yaml, nonebot
 from pathlib import Path
+from nonebot import require
+require("nonebot_plugin_localstore")
 
+import nonebot_plugin_localstore as store
 
-config_path = Path('config/video_api_config.yml')
+plugin_config_dir: Path = store.get_config_dir("nonebot_plugin_video_api")
 
 CONFIG_TEMPLATE = {
     #key值设置为要触发的词
@@ -20,18 +23,29 @@ CONFIG_TEMPLATE = {
     ],
 
 }
-# 检查config文件夹是否存在 不存在则创建
-if not Path("config").exists():
-    Path("config").mkdir()
-if not config_path.exists():
-    with open(config_path, 'w', encoding='utf-8') as f:
+
+global_config = nonebot.get_driver().config
+
+try:
+    # 检查.env中用户是否指定配置文件目录
+    config_path = global_config.nonebot_plugin_video_config
+    config_path = Path(config_path)
+    # 检查用户指定的config文件夹是否存在 不存在则创建
+    if not config_path.exists():
+        config_path.mkdir()
+except:
+    # 使用默认路径
+    config_path = plugin_config_dir
+
+plugin_config_file = config_path.joinpath("video_api_config.yml")
+if not plugin_config_file.exists():
+    with open(plugin_config_file, 'w', encoding='utf-8') as f:
         yaml.dump(CONFIG_TEMPLATE, f, allow_unicode=True)  
 
-
-with open(config_path,'r') as f:
+with open(plugin_config_file,'r') as f:
     api_data = yaml.load(f,Loader=yaml.FullLoader)#读取yaml文件
 
 class Config(BaseModel, extra=Extra.ignore):
     """Plugin Config Here"""
     api_data = api_data
-    proxies_http: str = None
+    global_config = global_config
