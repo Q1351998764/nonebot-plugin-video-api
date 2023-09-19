@@ -54,9 +54,11 @@ _✨ 一款可以自由增删视频指令和api的插件 ✨_
 
 
 - 注: 本插件的默认配置使用nonebot_plugin_localstore生成，linux系统中位置为~/.config/nonebot-plugin-video-api/video_api_config.yml，该文件会在插件第一次运行时自动生成。当然，本插件的配置文件目录也可以由用户手动指定，如下所示
+
 | 配置项 | 必填 | 默认值 | 说明 |
 |:-----:|:----:|:----:|:----:|
 | nonebot_plugin_video_config | 否 | 无 | 配置文件目录 |
+
 - 其内容如同介绍中的截图所示。
 写法如下所示：
 ```
