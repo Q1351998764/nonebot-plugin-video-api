@@ -42,7 +42,7 @@ if not plugin_config_file.exists():
     with open(plugin_config_file, 'w', encoding='utf-8') as f:
         yaml.dump(CONFIG_TEMPLATE, f, allow_unicode=True)  
 
-with open(plugin_config_file,'r') as f:
+with open(plugin_config_file,'r', encoding='utf-8') as f:
     api_data = yaml.load(f,Loader=yaml.FullLoader)#读取yaml文件
 
 class Config(BaseModel, extra=Extra.ignore):
