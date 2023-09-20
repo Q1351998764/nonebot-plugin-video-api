@@ -53,7 +53,7 @@ async def handle_function(matcher: Matcher, msg = EventPlainText()):
             if res:
                 with tempfile.NamedTemporaryFile() as fp:
                     fp.write(res.content)
-                    await keyword.finish(MessageSegment.video(file='file://'+ fp.name))
+                    await keyword.finish(MessageSegment.video(file='file:///'+ fp.name))
             else:
                 for url_dic in urls:
                     url = url_dic.get('url')
@@ -64,7 +64,7 @@ async def handle_function(matcher: Matcher, msg = EventPlainText()):
                     if res:
                         with tempfile.NamedTemporaryFile() as fp:
                             fp.write(res.content)
-                            await keyword.finish(MessageSegment.video(file='file://'+ fp.name))
+                            await keyword.finish(MessageSegment.video(file='file:///'+ fp.name))
                 else:
                     await keyword.finish("{}接口已全部失效，请稍后再试或更换新的接口".format(msg))
 
